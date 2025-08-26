@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --blue : #387191;
+    --dark-blue : #2A4D60;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+.blue-button{
+    border: solid var(--blue) 2px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: var(--blue);
+    height: 50px;
+    width: 100%;
+    color: white;
+    transition: ease-in-out .2s;
+    cursor: pointer;
+}
+.blue-button:hover{
+    color: var(--blue);
+    background-color: white;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-image: linear-gradient(to bottom left, #387191, #2A4D60 40%, #1D2930);
+    height: 100vh;
+    padding: 10px;
+}
+.container h1{
+    color: white;
+}
+.box{
+    display: flex;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    gap: 20px;
+    height: 100%;
+    max-height: 425px;
+    width: 100%;
+    max-width: 380px;
+    padding: 0 40px;
+    border-radius: 5px;
+    box-shadow: 4px 0 26.1px 9px rgba(0, 0, 0, 0.30);
+    animation: fadeInUp 0.5s ease-out;
+}
+.box .logo{
+    width: 75%;
+}
+.box .content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 210px;
+    width: 100%;
+}
+.box .content .welcome{
+    display: flex;
+    line-height: 1.7;
+    text-align: justify;
+    align-items: center;
+    font-size: .93rem;
+    height: 100%;
+    width: 100%;
+}
+.box .content form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+.box .content form label{
+    font-size: .85rem;
+}
+.box .content form select,.box .content form input{
+    height: 30px;
+    box-sizing: border-box;
+}
+.box .content form p{
+    text-align: justify;
+    font-size: .88rem;
+}
+.box .content form .extra{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    gap: 4px;
+}
+.box .content form .extra .error{
+    font-weight: 600;
+    font-size: .8rem;
+    color: rgb(255, 123, 0);
+}
+.box .content form .extra .error i{
+    color: red;
+    margin-right: 5px;
+}
+.box .content form .extra .add{
+    display: flex;
+    justify-content: end;
+}
+.box .content form .extra .add a{
+    color: var(--dark-blue);
+    font-weight: 600;
+    font-size: .8rem;
+}
+.box .content .warning{
+    display: flex;
+    flex-direction: column;
+}
+.box .content .warning h1{
+    text-align: center;
+    font-size: 1.3rem;
+    color: red;
+}
+.box .content .warning i{
+    margin-right: 8px;
+    color: rgb(255, 0, 0);
+    font-size: 1.5rem;
+}
+.box .content .warning p{
+    margin-top: 5px;
+    text-align: justify;
+}
+.box .content .warning .suc, .box .content .warning .suc *{
+    color: green;
+}
+/* ==Animation== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
