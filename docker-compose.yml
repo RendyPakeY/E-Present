@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  # Reverse Proxy Nginx: Menggabungkan Web App (/) dan phpMyAdmin (/pma) di 1 port (8080)
+  webserver:
+    image: nginx:alpine
+    container_name: epresent_proxy
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+      - phpmyadmin
+    networks:
+      - epresent_net
+
+  # Service 1: PHP Web Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: epresent_app
+    restart: always
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - epresent_net
+
+  # Service 2: MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: epresent_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: e_present
+      MYSQL_USER: epresent_user
+      MYSQL_PASSWORD: epresent_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - epresent_net
+
+  # Service 3: phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: epresent_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ABSOLUTE_URI: /pma/
+    depends_on:
+      - db
+    networks:
+      - epresent_net
+
+# Persist database data
+volumes:
+  db_data:
+
+# Internal network setup
+networks:
+  epresent_net:
+    driver: bridge
