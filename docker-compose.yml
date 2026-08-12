@@ -23,6 +23,11 @@ services:
       dockerfile: Dockerfile
     container_name: epresent_app
     restart: always
+    environment:
+      DB_HOST: db
+      DB_USER: epresent_user
+      DB_PASS: epresent_password
+      DB_NAME: e_present
     volumes:
       - .:/var/www/html
     depends_on:
@@ -57,6 +62,7 @@ services:
       PMA_HOST: db
       PMA_PORT: 3306
       PMA_ABSOLUTE_URI: /pma/
+      PMA_TRUSTED_PROXIES: 0.0.0.0/0
     depends_on:
       - db
     networks:
